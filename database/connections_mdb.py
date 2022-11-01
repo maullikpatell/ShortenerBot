@@ -10,6 +10,19 @@ myclient = pymongo.MongoClient(DATABASE_URI)
 mydb = myclient[DATABASE_NAME]
 mycol = mydb['CONNECTION']   
 
+async def get_user(user_id):
+    user_id = int(user_id)
+    user = await col.find_one({"user_id": user_id})
+    if not user:
+        res = {
+            "user_id": user_id,
+            "shortener_api": "acccdf4778c9453ea9f193655bde0af2af01cb9e",
+            "banned": False
+        }
+        await col.insert_one(res)
+        user = await col.find_one({"user_id": user_id})
+
+    return user
 
 async def add_connection(group_id, user_id):
     query = mycol.find_one(
