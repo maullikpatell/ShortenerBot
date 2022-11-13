@@ -5,7 +5,7 @@ from imdb import IMDb
 import asyncio
 from pyrogram.types import Message, InlineKeyboardButton
 from pyrogram import filters, Client, enums
-from typing import Union
+from typing import Union, List
 import re
 import os
 from datetime import datetime
